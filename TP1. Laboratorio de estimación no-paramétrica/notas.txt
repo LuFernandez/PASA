@@ -1,0 +1,3 @@
+hice el periodograma con dos vectores del strain, desde el comienzo hasta 1/3 del largo;
+y depués el último tercio final y dan parecidos lo que dice que es estacionario.
+superponerlas, ver el error cuadrático medio a ver qué onda.
