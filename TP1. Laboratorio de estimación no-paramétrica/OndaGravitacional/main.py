@@ -7,13 +7,13 @@ import readligo as rl
 
 fs = 4096
 
-#leemos los datos de livingston
+# leemos los datos de livingston
 pathL1 = '../LIGO/L-L1_LOSC_4_V2-1126259446-32.hdf5'
 strain_l1, time_l1, chan_dict_l1 = rl.loaddata(pathL1, 'L1')
 dt = time_l1[1] - time_l1[0]
 times = dt*np.array([i for i in range(len(strain_l1))])
 
-#leemos los datos de hanford
+# leemos los datos de hanford
 pathH1 = '../LIGO/H-H1_LOSC_4_V2-1126259446-32.hdf5'
 strain_h1, time_h1, chan_dict_h1 = rl.loaddata(pathH1, 'H1')
 #plt.plot(times, strain_h1)
@@ -45,7 +45,7 @@ R = z*zconj
 freqs = np.fft.fftfreq(len(strain_l1))
 xf = np.linspace(0.0, 1.0/(2.0*T), int(N/2))    #frecuencias
 
-plt.loglog(freqs, 2.0/N * np.abs(R[:N//2]))
+plt.loglog(xf, 2.0/N * np.abs(R[:N//2]))
 plt.xlim((10, 2000))
 plt.grid()
 plt.title("Periodogram")
@@ -61,4 +61,3 @@ plt.show()
 plt.acorr(strain_l1)
 scsig.windows.get_window("boxcar", len(strain_l1), fftbins=True)
 plt.show()
-
