@@ -1,4 +1,6 @@
-def calc_lms_montecarlo(K, mu, N, w0):
+import numpy as np
+
+def calc_lms_montecarlo(u, u_noisy, K, mu, N, w0, delay):
     """
     Realiza una simulación de Monte-Carlo del algoritmo LMS
     aplicado a un problema de predicción lineal de orden uno.
@@ -13,24 +15,25 @@ def calc_lms_montecarlo(K, mu, N, w0):
     w_montecarlo = np.zeros((N, 1))
     J_montecarlo = np.zeros((N, 1))
 
-    for i in range(K):
-        u = get_model_output(N)
+    for _ in range(K):
+        # u = get_model_output(N)
 
         # Predicción LMS
-        w = np.zeros((N, 1))
+        w = np.zeros((N+1, 1))
         J = np.zeros((N, 1))
         w[0] = w0
 
-        for n in range(1, N):
+        for n in range(0, N):
             y = w[n] * u_noisy[n]
             d = u[n - delay]
             # y = w[n - 1] * u[n - 1]                 # Ecuación de filtrado
             # d = u[n]
             e = d - y
-            J[n - 1] = e * e
-            w[n] = w[n - 1] + mu * u[n - 1] * e  # Ecuación LMS
+            J[n] = e * e
+            w[n + 1] = w[n] + mu * u[n] * e  # Ecuación LMS
+        w = w[:N]
 
-        J[N - 1] = J[N - 2]
+        # J[N - 1] = J[N - 2]
 
         w_montecarlo += w
         J_montecarlo += J
@@ -38,6 +41,6 @@ def calc_lms_montecarlo(K, mu, N, w0):
     w_montecarlo /= K
     J_montecarlo /= K
 
-    return (w_montecarlo, J_montecarlo)
+    return w_montecarlo, J_montecarlo
 
 
