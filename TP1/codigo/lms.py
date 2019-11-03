@@ -1,46 +1,42 @@
 import numpy as np
 
-def calc_lms_montecarlo(u, u_noisy, K, mu, N, w0, delay):
-    """
-    Realiza una simulación de Monte-Carlo del algoritmo LMS
-    aplicado a un problema de predicción lineal de orden uno.
 
-    K: número de simulaciones de Monte-Carlo
-    mu: parámetro de paso
-    N: número de iteraciones
-    w0: valor inicial del filtro adaptativo
-    """
+def lms_filter(u, d, w0, mu, N):
+    k = len(w0)
+    w = lms(u, d, w0, mu, N)
+    y = []
+    u_ = np.concatenate((np.zeros(k), u))
+    for i in range(0, len(w)):
+        y.append(np.dot(w[i], u_[i:i+k]))
 
-    # Simulación de Monte Carlo
-    w_montecarlo = np.zeros((N, 1))
-    J_montecarlo = np.zeros((N, 1))
+    return y
 
-    for _ in range(K):
-        # u = get_model_output(N)
 
-        # Predicción LMS
-        w = np.zeros((N+1, 1))
-        J = np.zeros((N, 1))
-        w[0] = w0
+def lms(u, d, w0, mu, N):
+    k = len(w0)
+    m = len(u)
+    w = []
 
-        for n in range(0, N):
-            y = w[n] * u_noisy[n]
-            d = u[n - delay]
-            # y = w[n - 1] * u[n - 1]                 # Ecuación de filtrado
-            # d = u[n]
-            e = d - y
-            J[n] = e * e
-            w[n + 1] = w[n] + mu * u[n] * e  # Ecuación LMS
-        w = w[:N]
+    for i in range(0, k):
+        w.append(w0)
+    for i in range(k, m):
+        w.append(lms_step(u[i-k:i], d[i], w[i-1], mu, N))
 
-        # J[N - 1] = J[N - 2]
+    return w
 
-        w_montecarlo += w
-        J_montecarlo += J
 
-    w_montecarlo /= K
-    J_montecarlo /= K
+def lms_step(u, d, w0, mu, N):
 
-    return w_montecarlo, J_montecarlo
+    w = w0  # add initial condition to output so we can iterate
+    # u2 = np.dot(u, u)
+    muu = mu*u
+    for _ in range(N):
+        y = np.dot(w, u)
+        e = d-y
+        delta_w = muu * e
+        w = w + delta_w
+
+    return w
+
 
 
