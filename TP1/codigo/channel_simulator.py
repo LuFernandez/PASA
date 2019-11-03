@@ -1,8 +1,9 @@
 import numpy as np
 from scipy import signal
 
-alpha = 0.01
-noise = 0.1
+alpha = 0.0001
+noise = 0.01
+
 
 def tx_channel(x):
 	y = np.array([])

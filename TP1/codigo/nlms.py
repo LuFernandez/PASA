@@ -1,17 +1,6 @@
 import numpy as np
 
 
-def nlms_filter(u, d, w0, mu, N):
-    k = len(w0)
-    w = nlms(u, d, w0, mu, N)
-    y = []
-    u_ = np.concatenate((np.zeros(k), u))
-    for i in range(0, len(w)):
-        y.append(np.dot(w[i], u_[i:i+k]))
-
-    return y
-
-
 def nlms(u, d, w0, mu, N):
     k = len(w0)
     m = len(u)
