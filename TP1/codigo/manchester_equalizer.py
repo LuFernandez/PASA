@@ -6,10 +6,10 @@ import math
 def equalize(u, d, w0, mu, N, samples_per_bit):
 	one = [-1 for _ in range(math.ceil(samples_per_bit / 2))] + [+1 for _ in range(math.floor(samples_per_bit / 2))]
 	zero = one[-1::-1]
-
+	J = []
 	k = len(w0)
 	t = len(d)
-	w = nlms(u[:t], d, w0, mu, N)  # training sequence
+	w, J = nlms(u[:t], d, w0, mu, N)  # training sequence
 	y = []
 	u_ = np.concatenate((np.zeros(k), u))
 
@@ -28,12 +28,12 @@ def equalize(u, d, w0, mu, N, samples_per_bit):
 			i += 1
 		d = one if y_hat1 < 0 else zero
 		for j in range(samples_per_bit):
-			w_ = nlms_step(u=u_[i+j:i+j+k], d=d[j], w0=w_, mu=mu, N=N)
+			w_, J = nlms_step(u=u_[i+j:i+j+k], d=d[j], w0=w_, mu=mu, N=N)
 		y += d
 		w.append(w_)
 		i += samples_per_bit
 
-	return y
+	return y, J
 
 
 def decision_algorithm(y, samples_per_bit):

@@ -9,6 +9,7 @@ import sign_error
 import sign_data
 import sign_sign
 import channel_simulator as ch_sim
+from manchester_equalizer import decision_algorithm, equalize
 
 
 baudrate = 250
@@ -35,14 +36,16 @@ u_noisy = ch_sim.tx_channel(x)
 
 
 mu = 0.0002
-N = 100
+N = 500
 delay = 1
-k = 10
+k = 20
 w0 = np.zeros(k)
 #y = lms.lms_filter(u=u_noisy[:-delay], d=x[delay:], mu=mu, N=N, w0=w0)
 start = time.process_time()
-y, J = nlms.nlms_filter(u=u_noisy, d=x, mu=mu, N=N, w0=w0)
+y, J = sign_sign.sign_sign_filter(u=u_noisy, d=x, w0=w0, N=N, mu=mu)
+# y, J = equalize(u=u_noisy, d=x, mu=mu, N=N, w0=w0, samples_per_bit = samplesperbit)
 end = time.process_time()
+# output = decision_algorithm(y, samplesperbit)
 print(end - start)
 
 
