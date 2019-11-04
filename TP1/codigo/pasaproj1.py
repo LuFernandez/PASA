@@ -1,17 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-from manchester_equalizer import equalize
+from manchester_equalizer import equalize, decision_algorithm
+import sign_sign
+import sign_data
+import sign_error
 import channel_simulator as ch_sim
 
 
 baudrate = 250
 fs = 4e3
 
-mu = 0.001
+mu = 0.0001
 k = 20
 w0 = np.zeros(k)
-Ns = list(range(1, 10)) + list(range(10, 100, 10)) + list(range(100, 1001, 100))
+Ns = list(range(1, 10)) + list(range(10, 100, 10))
+#Ns = [20]
 ber = np.zeros(len(Ns))
 sims = 5
 
@@ -34,7 +38,12 @@ for _ in range(sims):
 	u_noisy = ch_sim.tx_channel(x)
 
 	for j, N in enumerate(Ns):
-		y = equalize(u=u_noisy, d=x, mu=mu, N=N, w0=w0, samples_per_bit=samplesperbit)
+		y, _ = sign_sign.sign_sign_filter(u_noisy, x, w0, mu, N)
+		y = decision_algorithm(y, samplesperbit)
+		# plt.plot(t, x)
+		# plt.plot(t, y)
+		# plt.show()
+		# y = equalize(u=u_noisy, d=x, mu=mu, N=N, w0=w0, samples_per_bit=samplesperbit)
 
 		wrong_bits = 0
 		for i in range(samplesperbit, min([len(x), len(y)])):
@@ -53,7 +62,7 @@ for _ in range(sims):
 
 ber = [b/sims for b in ber]
 plt.stem(Ns[:len(ber)], ber)
-plt.title('NLMS, $\mu$=0.001, $M=20$, 4000 bits')
+plt.title('NLMS, $\mu$=' + str(mu)+', M=,' + str(k) + ', ' + str(sims*1000) + ' bits')
 plt.xlabel('Número de iteraciones por paso')
 plt.ylabel('Bit error rate')
 # plt.plot(t, u_noisy, color='purple', alpha=0.5)
