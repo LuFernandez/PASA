@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import signal
 
-alpha = 0.0001
+alpha = 0.01
 noise = 0.01
 
 

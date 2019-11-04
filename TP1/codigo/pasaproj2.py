@@ -14,7 +14,7 @@ import channel_simulator as ch_sim
 baudrate = 250
 fs = 4e3
 
-bits = np.random.randint(0, 2, 100)
+bits = np.random.randint(0, 2, 1000)
 N = len(bits)
 tf = N/baudrate
 samplesperbit = math.ceil(fs/baudrate)
@@ -35,13 +35,13 @@ u_noisy = ch_sim.tx_channel(x)
 
 
 mu = 0.0002
-N = 100
+N = 20
 delay = 1
-k = 10
+k = 20
 w0 = np.zeros(k)
 #y = lms.lms_filter(u=u_noisy[:-delay], d=x[delay:], mu=mu, N=N, w0=w0)
 start = time.process_time()
-y, J = nlms.nlms_filter(u=u_noisy, d=x, mu=mu, N=N, w0=w0)
+y, J = sign_sign.sign_sign_filter(u=u_noisy, d=x, mu=mu, N=N, w0=w0)
 end = time.process_time()
 print(end - start)
 
@@ -51,6 +51,14 @@ plt.plot(J)
 plt.xlabel('iteraciones')
 plt.grid()
 plt.show()
+
+
+wrong_bits = 0
+for i in range(samplesperbit, min([len(x), len(y)])):
+	if x[i] != y[i]:
+		wrong_bits += 1
+print(int(wrong_bits//samplesperbit), ' de ', len(bits)-1, ' bits mal')
+#print()
 
 plt.figure()
 plt.plot(t, x)
