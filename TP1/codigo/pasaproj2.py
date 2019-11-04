@@ -9,6 +9,7 @@ import sign_error
 import sign_data
 import sign_sign
 import channel_simulator as ch_sim
+from manchester_equalizer import decision_algorithm, equalize
 
 
 baudrate = 250
@@ -43,6 +44,7 @@ w0 = np.zeros(k)
 start = time.process_time()
 y, J = sign_sign.sign_sign_filter(u=u_noisy, d=x, mu=mu, N=N, w0=w0)
 end = time.process_time()
+# output = decision_algorithm(y, samplesperbit)
 print(end - start)
 
 
