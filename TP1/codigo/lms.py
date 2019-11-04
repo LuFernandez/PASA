@@ -36,7 +36,7 @@ def lms_step(u, d, w0, mu, N):
         e = d-y
         delta_w = muu * e
         w = w + delta_w
-        J = e * e
+        J.append(e * e)
 
     return w, J
 
