@@ -20,12 +20,12 @@ def nlms_step(u, d, w0, mu, N):
     w = w0  # add initial condition to output so we can iterate
     u2 = np.dot(u, u)
     muu = mu*u/(u2+0.00001)
-    for _ in range(N):
-        y = np.dot(w, u)
-        e = d-y
-        delta_w = muu * e
-        w = w + delta_w
-        J.append(e * e)
+    # for _ in range(N):
+    y = np.dot(w, u)
+    e = d-y
+    delta_w = muu * e
+    w = w + delta_w
+    J.append(e * e)
 
     return w, J
 

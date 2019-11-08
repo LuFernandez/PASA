@@ -15,7 +15,7 @@ from manchester_equalizer import decision_algorithm, equalize
 baudrate = 250
 fs = 4e3
 
-bits = np.random.randint(0, 2, 1000)
+bits = np.random.randint(0, 2, 100)
 N = len(bits)
 tf = N/baudrate
 samplesperbit = math.ceil(fs/baudrate)
@@ -32,7 +32,7 @@ for bit in bits:
 
 
 # x = [-1 if i%16 < 8 else 1 for i in range(len(t))]
-u_noisy = ch_sim.tx_channel(x)
+# u_noisy = ch_sim.tx_channel(x)
 
 
 
@@ -40,36 +40,34 @@ u_noisy = ch_sim.tx_channel(x)
 mu = 0.005
 N = 500
 delay = 1
-k = 20
+k = 1000
 w0 = np.zeros(k)
-monticharles = 10
-J = []
-total_time = 0.0
-#y = lms.lms_filter(u=u_noisy[:-delay], d=x[delay:], mu=mu, N=N, w0=w0)
-# start = time.process_time()
-# y, J = sign_sign.sign_sign_filter(u=u_noisy, d=x, mu=mu, N=N, w0=w0)
-# end = time.process_time()
-# # output = decision_algorithm(y, samplesperbit)
-# print(end - start)
 
+monticharles = 10
+# J = []
+total_time = 0.0
 
 plt.figure()
 for i in range(monticharles):
 	u_noisy = ch_sim.tx_channel(x)
-	start = time.process_time()
+	# start = time.process_time()
 	# y, J_i = equalize(u=u_noisy,d=x,mu=mu, N=N,w0=w0,samples_per_bit=samplesperbit)
-	y, J_i = lms.lms_filter(u=u_noisy, d=x, w0=w0, N=N, mu=mu)
+	y, J_i = lms.lms_filter(u=u_noisy, d=x, w0=w0, mu=mu)
 	end = time.process_time()
-	total_time += end-start
+	# total_time += end-start
 	plt.plot(J_i)
 	print(i)
-print(total_time/monticharles)
-plt.title('Montecarlo nlms')
+# print(total_time/monticharles)
+plt.title('Montecarlo lms')
 plt.xlabel('$N$')
 plt.ylabel('$J(N)$')
 # plt.ylim([-0.01, .2])
 plt.grid()
 plt.show()
+
+
+
+
 
 
 # plt.figure()
