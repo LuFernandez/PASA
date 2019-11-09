@@ -8,6 +8,7 @@ TP1/codigo/.idea/
 *.synctex.gz
 *.gz
 TP1/informe/workspace.code-workspace
+*.log
 TP1/informe/main.aux
 TP1/informe/main.aux
 TP1/informe/main.fdb_latexmk
