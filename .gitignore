@@ -1,3 +1,10 @@
 TP1/codigo/.idea/
 *.xml
 *.pyc
+*.aux
+*.dvi
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.gz
+TP1/informe/workspace.code-workspace
