@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1573180426 "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/conference_101719.tex" "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/conference_101719.pdf" "conference_101719" 1573180430
+["pdflatex"] 1573182236 "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.tex" "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.pdf" "main" 1573182240
   "C:/Program Files (x86)/MiKTeX 2.9/tex/context/base/supp-pdf.mkii" 1306918461 71592 fe353e1fbd982ffc647f3e98ff74da96 ""
   "C:/Program Files (x86)/MiKTeX 2.9/tex/latex/algorithms/algorithmic.sty" 1251549064 9550 793e9d5a71e74e730d97f6bf5d7e2bca ""
   "C:/Program Files (x86)/MiKTeX 2.9/tex/latex/cite/cite.sty" 1425353482 26218 19edeff8cdc2bcb704e8051dc55eb5a7 ""
@@ -89,14 +89,15 @@
   "C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/ot1pcr.fd" 1137125030 985 1ed784d7bfe47179f3550d2303b073f8 ""
   "C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/tex/latex/psnfss/ot1ptm.fd" 1137125030 961 15056f4a61917ceed3a44e4ac11fcc52 ""
   "IEEEtran.cls" 1440654524 288304 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/conference_101719.aux" 1573180429 2519 6f26d4c9afd1dc652cab9971fa845247 ""
-  "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/conference_101719.tex" 1573180421 15341 624fd66cb8b4232a04395e959ea6541b ""
-  "conference_101719.aux" 1573180429 2519 6f26d4c9afd1dc652cab9971fa845247 "pdflatex"
-  "conference_101719.tex" 1573180421 15341 624fd66cb8b4232a04395e959ea6541b ""
+  "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.aux" 1573182240 2528 57bd810bc43f41ed8ad7ddeb6b38435f ""
+  "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.tex" 1573182230 13529 a03e56b444693783c30def6266852162 ""
   "fig1.png" 1571321572 4535 0e284ca354e1b5c77378d3dfdb543874 ""
+  "main.aux" 1573182240 2528 57bd810bc43f41ed8ad7ddeb6b38435f "pdflatex"
+  "main.tex" 1573182230 13529 a03e56b444693783c30def6266852162 ""
+  "preamble.tex" 1573180867 457 ed90f292fb1d3f66e1a48d4d11fca293 ""
   (generated)
-  "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/conference_101719.log"
-  "conference_101719.log"
-  "conference_101719.aux"
-  "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/conference_101719.pdf"
-  "conference_101719.pdf"
+  "main.pdf"
+  "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.pdf"
+  "main.aux"
+  "main.log"
+  "c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.log"

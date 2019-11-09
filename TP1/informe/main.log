@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2019.5.16)  7 NOV 2019 23:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2019.5.16)  8 NOV 2019 00:03
 entering extended mode
-**c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/conference_101719.tex
-(c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/conference_101719.tex
+**c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.tex
+(c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.tex
 LaTeX2e <2018-12-01>
-(c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\Conference-LaTeX-template_10-17-19\IEEEtran.cls
+(c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\preamble.tex (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\IEEEtran.cls
 Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
 -- http://www.michaelshell.org/tex/ieeetran/
@@ -364,27 +364,27 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-) (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\Conference-LaTeX-template_10-17-19\conference_101719.aux)
-\openout1 = `conference_101719.aux'.
+)) (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\main.aux)
+\openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 12.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 2.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 2.
  ("C:\Users\lugfe\AppData\Local\Programs\MiKTeX 2.9\tex/latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    ... okay on input line 2.
 
 -- Lines per column: 56 (exact).
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
@@ -439,17 +439,17 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 57.
+LaTeX Font Info:    Try loading font information for U+msa on input line 15.
  ("C:\Users\lugfe\AppData\Local\Programs\MiKTeX 2.9\tex/latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 57.
+LaTeX Font Info:    Try loading font information for U+msb on input line 15.
  ("C:\Users\lugfe\AppData\Local\Programs\MiKTeX 2.9\tex/latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 127.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 79.
  ("C:\Users\lugfe\AppData\Local\Programs\MiKTeX 2.9\tex/latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [1{C:/Users/lugfe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
@@ -459,15 +459,15 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 <fig1.png, id=13, 82.1469pt x 71.5473pt>
 File: fig1.png Graphic file (type png)
 <use fig1.png>
-Package pdftex.def Info: fig1.png  used on input line 232.
+Package pdftex.def Info: fig1.png  used on input line 184.
 (pdftex.def)             Requested size: 82.14668pt x 71.5471pt.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 243.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 195.
  ("C:\Users\lugfe\AppData\Local\Programs\MiKTeX 2.9\tex/latex\psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 243.
- [2]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 195.
+ [2 <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/fig1.png (PNG copy)>]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -479,17 +479,19 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3 <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/Conference-LaTeX-template_10-17-19/fig1.png (PNG copy)>] (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\Conference-LaTeX-template_10-17-19\conference_101719.aux) ) 
+[3
+
+] (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\main.aux) ) 
 Here is how much of TeX's memory you used:
- 4472 strings out of 492941
- 66636 string characters out of 3126474
- 139791 words of memory out of 3000000
+ 4473 strings out of 492941
+ 66197 string characters out of 3126474
+ 138809 words of memory out of 3000000
  8292 multiletter control sequences out of 15000+200000
- 50325 words of font info for 101 fonts, out of 3000000 for 9000
+ 48740 words of font info for 99 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,35p,672b,277s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,11n,35p,624b,277s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\Conference-LaTeX-template_10-17-19\conference_101719.pdf (3 pages, 133290 bytes).
+Output written on c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\main.pdf (3 pages, 132725 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
