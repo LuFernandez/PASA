@@ -9,3 +9,9 @@ TP1/codigo/.idea/
 *.gz
 TP1/informe/workspace.code-workspace
 *.log
+TP1/informe/main.aux
+TP1/informe/main.aux
+TP1/informe/main.fdb_latexmk
+TP1/informe/main.fls
+TP1/informe/main.log
+TP1/informe/main.synctex.gz
