@@ -6,105 +6,122 @@ import sign_sign
 import sign_data
 import sign_error
 import channel_simulator as ch_sim
+import pandas as pd
 
 
-baudrate = 250
+baud_rate = 250
 fs = 4e3
-mu = 0.4
-#k = 20
-#Ns = list(range(1, 10)) + list(range(10, 100, 10)) + list(range(100, 1001, 100))
-N = 5
-ber = 0
-samplesperbit = math.ceil(fs / baudrate)
+samples_per_bit = math.ceil(fs / baud_rate)
 
-delay = 2
-training = 10
-sims = 100
+delay = 0
+training = 100
+sims = 300
+N_bits = 100
+N_filter = 4
 
-mus = np.arange(0.070, 0.61, 0.001)
-ber = np.zeros(len(mus))
+zero = [+1 for _ in range(samples_per_bit // 2)] + [-1 for _ in range(samples_per_bit // 2)]
+one = [-1 for _ in range(samples_per_bit // 2)] + [+1 for _ in range(samples_per_bit // 2)]
+
+mus = [0.005]
+#mus = np.arange(0.005, 0.1, 0.001)
+#mus = np.concatenate((np.arange(0.005, 0.01, 0.001), np.arange(0.01, 0.5, 0.01)))
+#mus = np.concatenate((np.arange(0.0001, 0.01, 0.0002), np.arange(0.01, 0.5, 0.01)))
+ber = np.zeros(sims)
+energies = np.zeros(sims)
+
 for sim in range(sims):
-	print("simulacion n ", sim+1)
-	bits = np.random.randint(0, 2, 100 + training)
-	tf = len(bits) / baudrate
-
+	bits = np.random.randint(0, 2, N_bits + training)
+	tf = len(bits) / baud_rate
 	t = np.linspace(0, tf, math.ceil(tf * fs))
 	x = []
 
 	for bit in bits:
 		if bit:
-			x += [+1 for _ in range(samplesperbit // 2)]
-			x += [-1 for _ in range(samplesperbit // 2)]
+			x += one
 		else:
-			x += [-1 for _ in range(samplesperbit // 2)]
-			x += [+1 for _ in range(samplesperbit // 2)]
+			x += zero
 
 	u_noisy = ch_sim.tx_channel(x)
+	# diff = np.diff(u_noisy)
+	# energies[sim] = np.dot(diff, diff)
+
+	print("simulacion n ", sim+1)
 
 	for i, mu in enumerate(mus):
-		# print("simulacion n ", sim)
 		# plt.plot(t, x)
 		# plt.plot(t, u_noisy, alpha=0.5)
 
-		w0 = np.zeros(N)
+		w0 = np.zeros(N_filter)
 		if delay:
-			y, _ = equalize(u=u_noisy[delay:], d=x[:training*samplesperbit], mu=mu, w0=w0, samples_per_bit=samplesperbit)
+			y, J = equalize(u=u_noisy[delay:], d=x[:training * samples_per_bit], mu=mu, w0=w0, samples_per_bit=samples_per_bit)
 		else:
-			y, _ = equalize(u=u_noisy, d=x[:training*samplesperbit], mu=mu, w0=w0, samples_per_bit=samplesperbit)
+			y, J = equalize(u=u_noisy, d=x[:training * samples_per_bit], mu=mu, w0=w0, samples_per_bit=samples_per_bit)
 
 		# plt.plot(t[:len(y)], y, label='delay='+str(delay))
 
-			# y = equalize(u=u_noisy, d=x, mu=mu, N=N, w0=w0, samples_per_bit=samplesperbit)
-			# y = decision_algorithm(y, samples_per_bit=samplesperbit)
-			#
 		wrong_bits = 0
-		y = decision_algorithm(y, 16)
+		y_d = decision_algorithm(y, samples_per_bit)
 		# plt.plot(t[:len(y)], y)
-		for j in range(samplesperbit, min([len(x), len(y)])):
-			if x[j] != y[j]:
+		for j in range(samples_per_bit*training, min([len(x), len(y_d)]), samples_per_bit):
+			if x[j] != y_d[j]:
 				wrong_bits += 1
 
-		wrong_bits /= samplesperbit
-		wrong_bits = int(wrong_bits)
-		biterrorrate = wrong_bits/((len(bits)-1)/baudrate)
-		ber[i] += biterrorrate
-		#plt.plot(t[:len(y)], y, label='delay='+str(delay))
+		biterrorrate = wrong_bits/((len(bits)-training) / baud_rate)
+		ber[sim] += biterrorrate
+
+		# plt.plot(t[:len(J)], J)
 
 		if i % 10 == 0:
 			print("mu n =", i, "mu=", mu, ', ber= ', biterrorrate)
-			#print("wrong bits: ", wrong_bits)
+			# print("wrong bits: ", wrong_bits)
 
-ber = [b/sims for b in ber]
+		if biterrorrate >= 0:
+			plt.plot(t, x)
+			plt.plot(t[:len(y)], y)
+			plt.plot(t[:len(y_d)], y_d)
+			plt.plot(t[:len(u_noisy)], u_noisy, alpha=0.5, color='black')
+			plt.grid(which='both')
+			plt.show()
+
+ber = [b/len(mus) for b in ber]
+# Js = [J/sims for J in Js]
 #
 # ber = [b/sims for b in ber]
-plt.plot(mus[:len(ber)], ber)
+plt.scatter(energies, ber)
+plt.grid(which='both')
+plt.show()
 
-#bits = np.random.randint(0, 2, 10)
-# bits = [1, 0, 0, 0, 1, 1, 1, 0, 0, 1]
-# tf = len(bits)/baudrate
-# samplesperbit = math.ceil(fs/baudrate)
-#
-# t = np.linspace(0, tf, math.ceil(tf*fs))
-# x = []
-# for bit in bits:
-# 	if bit:
-# 		x += [+1 for _ in range(samplesperbit//2)]
-# 		x += [-1 for _ in range(samplesperbit//2)]
-# 	else:
-# 		x += [-1 for _ in range(samplesperbit//2)]
-# 		x += [+1 for _ in range(samplesperbit//2)]
-#
-# u_noisy = ch_sim.tx_channel(x)
-#
-#
-#plt.show()
+# plt.plot(mus, Js)
+# plt.grid(which='both')
+# plt.show()
 
-#plt.title('NLMS, $\mu$=' + str(mu) + ', ' + str(sims*1000) + ' bits')
+
+
+
+# plt.title('NLMS, $\mu$=' + str(mu) + ', ' + str(sims*1000) + ' bits')
 # plt.xlabel('Tiempo')
 # plt.plot(t, x, label='entrada')
 # plt.plot(t, u_noisy, label='salida')
 # plt.vlines(x=t[training*samplesperbit], ymin=-5, ymax=5, colors='red')
 # plt.stem(ber)
-plt.grid(which='both')
-# plt.legend()
-plt.show()
+
+
+# df = pd.DataFrame(
+# 	{
+# 		'mu': mus,
+# 		'ber': ber
+# 	}
+# )
+#
+# df.to_csv(path_or_buf='montecarlo_alpha=1e-2_delay='+str(delay)+
+# 					  '_N='+str(N_filter)+'_training='+str(training)+'.csv', index=False)
+
+df = pd.DataFrame(
+	{
+		'd_energies': energies,
+		'ber': ber
+	}
+)
+
+df.to_csv(path_or_buf='diff_alpha=1e-2_delay='+str(delay)+
+					  '_N='+str(N_filter)+'_training='+str(training)+'.csv', index=False)

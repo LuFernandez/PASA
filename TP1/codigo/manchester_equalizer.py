@@ -26,10 +26,11 @@ def equalize(u, d, w0, mu, samples_per_bit):
 			y_hat.append(np.dot(w_, u_[i+j:i+j+k]))
 		d = decision_algorithm(y_hat, samples_per_bit)
 		for j in range(samples_per_bit):
-			w_, J = nlms_step(u=u_[i+j:i+j+k], d=d[j], w0=w_, mu=mu)
+			w_, _ = nlms_step(u=u_[i+j:i+j+k], d=d[j], w0=w_, mu=mu)
+
+		w.append(w_)
 		#y += d
 		y += y_hat
-		w.append(w_)
 		i += samples_per_bit
 
 	return y, J
