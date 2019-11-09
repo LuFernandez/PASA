@@ -1,0 +1,42 @@
+\section{Ecualización Adaptativa por Inversión de Sistemas}
+\todo{que onda el nombre de esta seccion xxdxdx}
+
+El objetivo del proyecto es invertir los efectos del canal 
+-el sistema desconocido- mediante el esquema de filtrado
+adaptativo conocido como inversión de sistemas. El diagrama se muestra 
+a continuación:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{imagenes/block.PNG}
+    \caption{Inversión de sistemas.}
+\end{figure}
+
+En principio se asume que el ruido del canal 
+es incorrelacionado con $s(n)$.
+El filtrado funciona de la siguiente manera, se tiene 
+la señal de entrada $s(n)$, que se transmite por el sistema
+desconocido -el canal ya mencionado-, cuya salida es la señal 
+$x(n)=u(n)$, que es la entrada al filtro adaptativo, de donde se obtiene
+$\hat{y}(n)$. Realimentando la señal de error $e(n)$
+al filtro adaptativo se maximiza la correlación entre la salida del 
+filtro y la señal deseada $y(n)=d(n)$.
+Opcionalmente, a su vez, se puede colocar un delay, retrasando la señal al obtener 
+$d(n)$ para compensar el delay propio del sistema.\newline
+Con ésto se consigue una salida con una respuesta en frecuencia inversa
+al sistema desconocido, lo que anula su efecto.\newline
+Sin embargo, en un enlace digital el receptor no conoce la respuesta deseada, por lo que
+este esquema no es de utilidad. La solución consiste en utilizar 
+una secuencia de entrenamiento, una respuesta deseada $d(n)$ preacordada entre 
+emisor y receptor.
+El diagrama de bloques completo se observa en la figura siguiente:
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{imagenes/esquema.PNG}
+    \caption{Diagrama de bloques con decision-directed feedback.}
+\end{figure}
+Luego del período de entrenamiento inicial los coeficientes del ecualizador pueden ser
+ continuamente ajustados con un decision-directed feedback. De esta manera, 
+ la señal de error $e(n)=d(n)-y(n)$ se deriva del último (no necesariamente correcto) 
+ bit estimado de la secuencia transmitida $u(n)$. Cabe aclarar que 
+ la estimación depende de las 16 muestras que componen cada bit, y se implementó la óptima.
