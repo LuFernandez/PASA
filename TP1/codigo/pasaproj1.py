@@ -13,33 +13,24 @@ baud_rate = 250
 fs = 4e3
 samples_per_bit = math.ceil(fs / baud_rate)
 
-delay = 0
-training = 100
-sims = 300
+delay = 1
+training = 15
+sims = 100
 N_bits = 100
 N_filter = 4
 
-zero = [+1 for _ in range(samples_per_bit // 2)] + [-1 for _ in range(samples_per_bit // 2)]
-one = [-1 for _ in range(samples_per_bit // 2)] + [+1 for _ in range(samples_per_bit // 2)]
 
-mus = [0.005]
-#mus = np.arange(0.005, 0.1, 0.001)
-#mus = np.concatenate((np.arange(0.005, 0.01, 0.001), np.arange(0.01, 0.5, 0.01)))
-#mus = np.concatenate((np.arange(0.0001, 0.01, 0.0002), np.arange(0.01, 0.5, 0.01)))
-ber = np.zeros(sims)
-energies = np.zeros(sims)
+# mus = [0.005]
+# mus = np.arange(0.005, 0.1, 0.001)
+# mus = np.concatenate((np.arange(0.005, 0.01, 0.001), np.arange(0.01, 0.5, 0.01)))
+mus = np.concatenate((np.arange(0.0001, 0.01, 0.0002), np.arange(0.01, 1, 0.01)))
+ber = np.zeros(len(mus))
+# energies = np.zeros(sims)
 
 for sim in range(sims):
-	bits = np.random.randint(0, 2, N_bits + training)
-	tf = len(bits) / baud_rate
-	t = np.linspace(0, tf, math.ceil(tf * fs))
-	x = []
-
-	for bit in bits:
-		if bit:
-			x += one
-		else:
-			x += zero
+	x = ch_sim.generate_random_sequence(N_bits+training)
+	# tf = (N_bits + training) / baud_rate
+	# t = np.linspace(0, tf, math.ceil(tf * fs))
 
 	u_noisy = ch_sim.tx_channel(x)
 	# diff = np.diff(u_noisy)
@@ -66,8 +57,8 @@ for sim in range(sims):
 			if x[j] != y_d[j]:
 				wrong_bits += 1
 
-		biterrorrate = wrong_bits/((len(bits)-training) / baud_rate)
-		ber[sim] += biterrorrate
+		biterrorrate = wrong_bits/(N_bits / baud_rate)
+		ber[i] += biterrorrate
 
 		# plt.plot(t[:len(J)], J)
 
@@ -75,25 +66,22 @@ for sim in range(sims):
 			print("mu n =", i, "mu=", mu, ', ber= ', biterrorrate)
 			# print("wrong bits: ", wrong_bits)
 
-		if biterrorrate >= 0:
-			plt.plot(t, x)
-			plt.plot(t[:len(y)], y)
-			plt.plot(t[:len(y_d)], y_d)
-			plt.plot(t[:len(u_noisy)], u_noisy, alpha=0.5, color='black')
-			plt.grid(which='both')
-			plt.show()
+		# if biterrorrate >= 0:
+		# 	plt.plot(t, x)
+		# 	plt.plot(t[:len(y)], y)
+		# 	plt.plot(t[:len(y_d)], y_d)
+		# 	plt.plot(t[:len(u_noisy)], u_noisy, alpha=0.5, color='black')
+		# 	plt.grid(which='both')
+		# 	plt.show()
 
-ber = [b/len(mus) for b in ber]
+# ber = [b/len(mus) for b in ber]
 # Js = [J/sims for J in Js]
 #
-# ber = [b/sims for b in ber]
-plt.scatter(energies, ber)
+ber = [b/sims for b in ber]
+plt.plot(mus, ber)
 plt.grid(which='both')
 plt.show()
 
-# plt.plot(mus, Js)
-# plt.grid(which='both')
-# plt.show()
 
 
 
@@ -118,10 +106,10 @@ plt.show()
 
 df = pd.DataFrame(
 	{
-		'd_energies': energies,
+		'mu': mus,
 		'ber': ber
 	}
 )
 
-df.to_csv(path_or_buf='diff_alpha=1e-2_delay='+str(delay)+
+df.to_csv(path_or_buf='montecarlo_alpha=1e-3_delay='+str(delay)+
 					  '_N='+str(N_filter)+'_training='+str(training)+'.csv', index=False)

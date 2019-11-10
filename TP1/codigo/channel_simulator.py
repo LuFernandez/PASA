@@ -1,8 +1,25 @@
 import numpy as np
 from scipy import signal
 
-alpha = 0.01
+alpha = 0.001
 noise = 0.1
+samples_per_bit = 16
+
+zero = [+1 for _ in range(samples_per_bit // 2)] + [-1 for _ in range(samples_per_bit // 2)]
+one = [-1 for _ in range(samples_per_bit // 2)] + [+1 for _ in range(samples_per_bit // 2)]
+
+
+def generate_random_sequence(n_bits):
+	bits = np.random.randint(0, 2, n_bits)
+	x = []
+
+	for bit in bits:
+		if bit:
+			x += one
+		else:
+			x += zero
+
+	return x
 
 
 def tx_channel(x):
