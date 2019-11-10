@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2019.11.9)  9 NOV 2019 20:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840) (preloaded format=pdflatex 2019.11.9)  10 NOV 2019 15:13
 entering extended mode
 **c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.tex
 (c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/main.tex
@@ -700,30 +700,64 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
  ("C:\Users\lugfe\AppData\Local\Programs\MiKTeX 2.9\tex/latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<imagenes/preblock.png, id=4, 476.37975pt x 99.9735pt>
+Underfull \hbox (badness 1852) in paragraph at lines 17--27
+\T1/ptm/m/n/10 con-sistía en-tonces en la vari-abil-i-dad del canal. En las
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--27
+
+ []
+
+<imagenes/1.jpeg, id=4, 642.4pt x 481.8pt>
+File: imagenes/1.jpeg Graphic file (type jpg)
+<use imagenes/1.jpeg>
+Package pdftex.def Info: imagenes/1.jpeg  used on input line 30.
+(pdftex.def)             Requested size: 192.72148pt x 144.5411pt.
+<imagenes/2.jpeg, id=5, 642.4pt x 481.8pt>
+File: imagenes/2.jpeg Graphic file (type jpg)
+<use imagenes/2.jpeg>
+Package pdftex.def Info: imagenes/2.jpeg  used on input line 34.
+(pdftex.def)             Requested size: 192.72148pt x 144.5411pt.
+<imagenes/3.jpeg, id=6, 642.4pt x 481.8pt>
+File: imagenes/3.jpeg Graphic file (type jpg)
+<use imagenes/3.jpeg>
+Package pdftex.def Info: imagenes/3.jpeg  used on input line 38.
+(pdftex.def)             Requested size: 192.72148pt x 144.5411pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imagenes/4.jpeg, id=7, 642.4pt x 481.8pt>
+File: imagenes/4.jpeg Graphic file (type jpg)
+<use imagenes/4.jpeg>
+Package pdftex.def Info: imagenes/4.jpeg  used on input line 42.
+(pdftex.def)             Requested size: 192.72148pt x 144.5411pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imagenes/preblock.png, id=8, 476.37975pt x 99.9735pt>
 File: imagenes/preblock.png Graphic file (type png)
 <use imagenes/preblock.png>
-Package pdftex.def Info: imagenes/preblock.png  used on input line 35.
+Package pdftex.def Info: imagenes/preblock.png  used on input line 53.
 (pdftex.def)             Requested size: 238.18929pt x 49.98662pt.
 ) (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\inversiondesist.tex
-<imagenes/block.PNG, id=6, 495.0495pt x 247.52475pt>
+Underfull \vbox (badness 2253) has occurred while \output is active []
+
+ [1{C:/Users/lugfe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+
+ <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/1.jpeg> <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/2.jpeg> <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/3.jpeg> <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/4.jpeg> <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/preblock.png>]
+<imagenes/block.PNG, id=20, 495.0495pt x 247.52475pt>
 File: imagenes/block.PNG Graphic file (type png)
 <use imagenes/block.PNG>
 Package pdftex.def Info: imagenes/block.PNG  used on input line 11.
 (pdftex.def)             Requested size: 247.52414pt x 123.76207pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<imagenes/esquema.PNG, id=7, 547.2947pt x 140.02313pt>
+<imagenes/esquema.PNG, id=21, 547.2947pt x 140.02313pt>
 File: imagenes/esquema.PNG Graphic file (type png)
 <use imagenes/esquema.PNG>
 Package pdftex.def Info: imagenes/esquema.PNG  used on input line 35.
 (pdftex.def)             Requested size: 218.91399pt x 56.00826pt.
-) (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\filtroadaptativo.tex) [1{C:/Users/lugfe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
-
-
- <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/preblock.png> <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/block.PNG> <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/esquema.PNG>]
+) (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\filtroadaptativo.tex)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -735,21 +769,19 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[2
-
-] (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\main.aux) ) 
+[2 <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/block.PNG> <c:/Users/lugfe/Documents/GitHub/PASA/TP1/informe/imagenes/esquema.PNG>] (c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\main.aux) ) 
 Here is how much of TeX's memory you used:
- 15086 strings out of 492499
- 291889 string characters out of 3122779
- 335456 words of memory out of 3000000
- 19121 multiletter control sequences out of 15000+200000
+ 15107 strings out of 492499
+ 292181 string characters out of 3122779
+ 332169 words of memory out of 3000000
+ 19137 multiletter control sequences out of 15000+200000
  107623 words of font info for 112 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,9n,82p,542b,765s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users/lugfe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\main.pdf (2 pages, 133383 bytes).
+Output written on c:/Users\lugfe\Documents\GitHub\PASA\TP1\informe\main.pdf (2 pages, 331946 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
+ 52 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
