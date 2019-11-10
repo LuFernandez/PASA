@@ -3,7 +3,14 @@
 \begin{document}
 
 \section{Filtro Adaptativo}
-Al momento de elegir el algoritmo que se implementará para el filtro, 
+Al momento de elegir el algoritmo que se implementó para el filtro, 
+se analizaron varias alternativas, entre ellas LMS, NLMS, VS-LMS y Sign LMS.
+En primer lugar, los algoritmos Sign LMS, entre ellos, sign-error, sign-data
+y sign-sign fueron descartados ya que el baud rate de la señal era de 250bps,
+cabe recordar que esta variante de LMS es de utilidad para ecualizar canales de
+comunicación digital de alta velocidad. En segundo lugar y  luego de analizar 
+los resultados obtenidos por Bismor\cite{}, Czyz y Ogonowski\cite{bismor} no vale la pena usar vs lms porque NLMSl
+le pasa el trapo lo que nos lleva al debate de si utilizar lms o nlms
 \subsection{LMS}
 \subsection{NLMS}
 
