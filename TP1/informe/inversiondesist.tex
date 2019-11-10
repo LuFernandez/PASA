@@ -1,3 +1,7 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
 \section{Ecualización Adaptativa por Inversión de Sistemas}
 \todo{que onda el nombre de esta seccion xxdxdx}
 
@@ -38,5 +42,29 @@ El diagrama de bloques completo se observa en la figura siguiente:
 Luego del período de entrenamiento inicial los coeficientes del ecualizador pueden ser
  continuamente ajustados con un decision-directed feedback. De esta manera, 
  la señal de error $e(n)=d(n)-y(n)$ se deriva del último (no necesariamente correcto) 
- bit estimado de la secuencia transmitida $u(n)$. Cabe aclarar que 
- la estimación depende de las 16 muestras que componen cada bit, y se implementó la óptima.
+ bit estimado de la secuencia transmitida $u(n)$. 
+ 
+ En este caso, como la se\~nal se encontraba codificada en formato Manchester, la decisi\'on
+ del bit recibido no consist\'ia en un simple comparador, sino que se utiliz\'o la regla de decisi\'on
+ bayesiana \todo{referencia shanmugan}. Partiendo de la regla:
+ 
+ \begin{equation}
+ 	y^{T} \cdot (s_1 - s_0) \underset{H_0}{\overset{H_1}{\gtrless}} 
+ 	\sigma^2 \cdot \ln{\left( \frac{P(H_0)}{P(H_1)} \right)}
+ 	+ \frac{1}{2} \left( s_1^T s_1 - s_0^T s_0\right)
+ \end{equation}
+ 
+ donde $y$ es un vector con 16 mediciones, $s_1$ contiene las 16 muestras que forman un bit de 1 (es decir, 8 veces el valor -1 seguido de 8 veces el valor 1), y $s_0$, las que forman un 0. Como $s_0 = -s_1$, y ambos s\'imbolos son equiprobables (lo cual asumimos porque no conocemos a priori las caracter\'isticas del mensaje que se mandar\'a), la expresi\'on se ve simplificada en:
+ 
+ \begin{equation}
+ 	y^{T} \cdot s_1 \underset{H_0}{\overset{H_1}{\gtrless}} 0
+ \end{equation}
+ 
+Considerando las caracter\'isticas de la codificaci\'on Manchester, la regla de decisi\'on resulta ser:
+
+\begin{equation}
+	\sum_{i=0}^7 y_i \underset{H_0}{\overset{H_1}{\lessgtr}}
+	\sum_{i=8}^{15} y_i
+\end{equation} 
+ 
+\end{document}
