@@ -12,11 +12,42 @@ comunicación digital de alta velocidad. En segundo lugar y  luego de analizar
 los resultados obtenidos y las conclusiones propuestas por Bismor \cite{bismor},
 se decidió no implementar VS-LMS. En las palabras de los autores: 
 "no hay algoritmo VS-LMS que sea tan versátil, fácil de implementar y adecuado 
-para aplicaciones en tiempo real como el NLMS."\newline
+para aplicaciones en tiempo real como el NLMS".\newline
 Esta observación, si bien descarta la implementación de VS-LMS, 
-plantea un último debate respecto de si corresponde utilizar LMS o NLMS. 
+plantea un último debate respecto a si corresponde utilizar LMS o NLMS. 
+Se consideró entonces, analizar el parámetro de paso que se utilizaría para LMS. 
+Se recuerda que el paso para que converja LMS está dado por
+\begin{equation}
+    0<\mu<\frac{2}{\lambda_\text{máx}}
+\end{equation}
+en donde $\lambda_\text{máx}$ es el autovalor más grande de $R$, la matriz de 
+autocorrelación de $u(n)$. En la medida en que el  $\mu$ elegido se acerque 
+al valor máximo, la velocidad de convergencia aumenta, pero así también el desajuste $\mathscr{M}$.
+Por el contrario, al disminuir el paso, la convergencia se ralentiza, y disminuye $\mathscr{M}$. 
+Se trata de una relación de compromiso entre la velocidad de convergencia y el desajuste.
+Se realizaron 5000 simulaciones y se calculó el $\mu_\text{máx}$ para cada una de ellas.
+Se muestra a continuación un histograma con la frecuencia de aparición del paso máximo, 
+en función de este y los $\mu_\text{máx}$ en función del número de simulación.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{imagenes/lms_mus_hist.png}
+    \caption{Frecuencias de $\mu_\text{máx}$ en función del mismo.}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{imagenes/lms_mus_scatter.png}
+    \caption{$\mu_\text{máx}$ en función del número de simulación.}
+\end{figure}
 
-\subsection{LMS}
+El valor del parámetro de paso varía entre valores cercanos a 0 y mayores a 8, 
+ya que las energías de la señal de entrada no están acotadas debido a las características 
+del canal. Lo último presenta un problema al elegir el $\mu$ conveniente para la situación real,
+puesto que si se elige un paso pequeño, tardará de manera considerable cuando el $\mu_\text{máx}$ sea alto;
+y si se decide por un $\mu$ mayor, divergirá en los otros casos. \newline
+Debido a lo expuesto anteriormente, se decidió no utilizar LMS, en pos de que no diverja el algoritmo. 
+Esto se logró utilizando NLMS, pues lo que se introduce es un parámetro de paso variable, que depende
+de la energía de la señal de entrada, por lo que la misma ya no es un problema.
+
 \subsection{NLMS}
 
 \end{document}
