@@ -9,8 +9,13 @@ En primer lugar, los algoritmos Sign LMS, entre ellos, sign-error, sign-data
 y sign-sign fueron descartados ya que el baud rate de la señal era de 250bps,
 cabe recordar que esta variante de LMS es de utilidad para ecualizar canales de
 comunicación digital de alta velocidad. En segundo lugar y  luego de analizar 
-los resultados obtenidos por Bismor\cite{}, Czyz y Ogonowski\cite{bismor} no vale la pena usar vs lms porque NLMSl
-le pasa el trapo lo que nos lleva al debate de si utilizar lms o nlms
+los resultados obtenidos y las conclusiones propuestas por Bismor \cite{bismor},
+se decidió no implementar VS-LMS. En las palabras de los autores: 
+"no hay algoritmo VS-LMS que sea tan versátil, fácil de implementar y adecuado 
+para aplicaciones en tiempo real como el NLMS."\newline
+Esta observación, si bien descarta la implementación de VS-LMS, 
+plantea un último debate respecto de si corresponde utilizar LMS o NLMS. 
+
 \subsection{LMS}
 \subsection{NLMS}
 
