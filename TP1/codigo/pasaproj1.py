@@ -16,21 +16,21 @@ samples_per_bit = math.ceil(fs / baud_rate)
 delay = 1
 training = 15
 sims = 100
-N_bits = 100
-N_filter = 4
+N_bits = 20
+N_filter = 5
 
 
-# mus = [0.005]
+mus = [0.005]
 # mus = np.arange(0.005, 0.1, 0.001)
 # mus = np.concatenate((np.arange(0.005, 0.01, 0.001), np.arange(0.01, 0.5, 0.01)))
-mus = np.concatenate((np.arange(0.0001, 0.01, 0.0002), np.arange(0.01, 1, 0.01)))
+# mus = np.concatenate((np.arange(0.0001, 0.01, 0.0002), np.arange(0.01, 1, 0.01)))
 ber = np.zeros(len(mus))
 # energies = np.zeros(sims)
 
 for sim in range(sims):
 	x = ch_sim.generate_random_sequence(N_bits+training)
-	# tf = (N_bits + training) / baud_rate
-	# t = np.linspace(0, tf, math.ceil(tf * fs))
+	tf = (N_bits + training) / baud_rate
+	t = np.linspace(0, tf, math.ceil(tf * fs))
 
 	u_noisy = ch_sim.tx_channel(x)
 	# diff = np.diff(u_noisy)
@@ -48,7 +48,7 @@ for sim in range(sims):
 		else:
 			y, J = equalize(u=u_noisy, d=x[:training * samples_per_bit], mu=mu, w0=w0, samples_per_bit=samples_per_bit)
 
-		# plt.plot(t[:len(y)], y, label='delay='+str(delay))
+		#plt.plot(t[:len(y)], y, label='delay='+str(delay))
 
 		wrong_bits = 0
 		y_d = decision_algorithm(y, samples_per_bit)
@@ -66,23 +66,26 @@ for sim in range(sims):
 			print("mu n =", i, "mu=", mu, ', ber= ', biterrorrate)
 			# print("wrong bits: ", wrong_bits)
 
-		# if biterrorrate >= 0:
-		# 	plt.plot(t, x)
-		# 	plt.plot(t[:len(y)], y)
-		# 	plt.plot(t[:len(y_d)], y_d)
-		# 	plt.plot(t[:len(u_noisy)], u_noisy, alpha=0.5, color='black')
-		# 	plt.grid(which='both')
-		# 	plt.show()
+		if biterrorrate >= 0:
+			plt.plot(t, x, label='señal transmitida')
+			plt.plot(t[:len(y)], y, label='salida del filtro')
+			plt.plot(t[:len(y_d)], y_d, color='green', label='señal recuperada')
+			plt.plot(t[:len(u_noisy)], u_noisy, alpha=0.5, color='purple', label='señal recibida')
+
+			plt.vlines(t[samples_per_bit*training], ymin=-2, ymax=2, color='red', label='fin de la secuencia de entrenamiento')
+			plt.grid(which='both')
+			plt.legend()
+			plt.show()
 
 # ber = [b/len(mus) for b in ber]
 # Js = [J/sims for J in Js]
 #
-ber = [b/sims for b in ber]
-plt.plot(mus, ber)
-plt.grid(which='both')
-plt.show()
-
-
+# ber = [b/sims for b in ber]
+# plt.plot(mus, ber)
+# plt.grid(which='both')
+# plt.show()
+#
+#
 
 
 
@@ -111,5 +114,5 @@ df = pd.DataFrame(
 	}
 )
 
-df.to_csv(path_or_buf='montecarlo_alpha=1e-3_delay='+str(delay)+
-					  '_N='+str(N_filter)+'_training='+str(training)+'.csv', index=False)
+# df.to_csv(path_or_buf='montecarlo_alpha=1e-3_delay='+str(delay)+
+# 					  '_N='+str(N_filter)+'_training='+str(training)+'.csv', index=False)
