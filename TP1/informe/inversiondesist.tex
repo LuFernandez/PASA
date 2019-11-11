@@ -17,14 +17,14 @@ a continuación:
 \end{figure}
 
 En principio se asume que el ruido del canal 
-es incorrelacionado con $s(n)$.\todo[inline]{cambiar nombres al esquema y al texto}
+es incorrelacionado con $s(n)$.
 El filtrado funciona de la siguiente manera, se tiene 
 la señal de entrada $s(n)$, que se transmite por el sistema
-desconocido -el canal ya mencionado-, cuya salida es la señal 
-$x(n)=u(n)$, que es la entrada al filtro adaptativo, de donde se obtiene
-$\hat{y}(n)$. Realimentando la señal de error $e(n)$
+desconocido -el canal ya mencionado-, cuya salida es 
+$u(n)$, la entrada al filtro adaptativo, de donde se obtiene
+$y(n)$. Realimentando la señal de error $e(n)=d(n)-y(n)$
 al filtro adaptativo se maximiza la correlación entre la salida del 
-filtro y la señal deseada $y(n)=d(n)$.
+filtro y la señal deseada $d(n)$.
 Opcionalmente, a su vez, se puede colocar un delay, retrasando la señal al obtener 
 $d(n)$ para compensar el delay propio del sistema.\newline
 Con ésto se consigue una salida con una respuesta en frecuencia inversa
@@ -36,8 +36,8 @@ emisor y receptor.
 El diagrama de bloques completo se observa en la figura siguiente:
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.45]{imagenes/esquema.PNG}
-    \caption{Diagrama de bloques con decision-directed feedback.}
+    \includegraphics[scale=0.7]{imagenes/block-completo.png}
+    \caption{Diagrama de bloques con decision-directed feedback y secuencia de entrenamiento.}
 \end{figure}
 Luego del período de entrenamiento inicial los coeficientes del ecualizador pueden ser
  continuamente ajustados con un decision-directed feedback. De esta manera, 

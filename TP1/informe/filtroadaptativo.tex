@@ -49,6 +49,7 @@ Esto se logró utilizando NLMS, pues lo que se introduce es un parámetro de pas
 de la energía de la señal de entrada, por lo que la misma ya no es un problema.
 
 \subsection*{NLMS}
+\subsection*{Implementación}
 \subsubsection*{Orden del filtro}
 Como se mencionó en secciones anteriores, el canal es, si bien aleatorio, conocido, por 
 lo que se pudo observar analizándolo que contaba con dos pares de polos conjugados, 4 polos.
@@ -76,16 +77,17 @@ del filtro y del canal. Además, es sólo utilizado para la secuencia de entrena
 En primer lugar se acotó el valor del delay entre 0-4 por el orden ideal del filtro, 
 luego realizó un Montecarlo para estos valores de delay, donde nuevamente se
 graficó el BER en función del parámetro de paso. Obteniendo una mejor tasa de error 
-para el caso de delay unitario por lo que
+para el caso de delay unitario por lo que fue elegido.
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.6]{imagenes/delay.png}
     \caption{Bit error rate en función de $\mu$ para delays entre 0-4.}
 \end{figure}
 
-
-\subsubsection*{Parámetro de paso $\mu$}
-0.005
+\subsubsection*{Paso $\mu$}
+De manera análoga, con base en ambos gráficos, se eligió un paso $\mu=0.005$; el valor
+para el cual tanto para un  delay unitario, como para un filtro de quinto orden
+el BER obtenido era menor al $5\%$.
 
 
 \end{document}
