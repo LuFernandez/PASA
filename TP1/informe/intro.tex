@@ -19,23 +19,17 @@ codificada por Manchester, muestreada a una frecuencia de sampleo
 La principal dificultad consistía entonces en la variabilidad del canal. En las 
 siguientes figuras se puede notar el efecto de lo mencionado, siendo la 
 señal en azul los bits enviados y en naranja lo recibido. \newline
-
-\begin{figure}[h!]
+\todo[inline]{comentario sobre estacionareidad}
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{imagenes/1.jpeg}
+    \includegraphics[scale=0.5]{imagenes/1.jpeg}\\
+    \includegraphics[scale=0.5]{imagenes/2.jpeg}
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.35]{imagenes/2.jpeg}
-\end{figure}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[scale=0.35]{imagenes/3.jpeg}
-\end{figure}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[scale=0.35]{imagenes/4.jpeg}
-    \caption{Señales obtenidas en el receptor, al pasar por del canal.}
+    \includegraphics[scale=0.5]{imagenes/3.jpeg}\\
+    \includegraphics[scale=0.5]{imagenes/4.jpeg}
+    \caption{Señales obtenidas en el receptor, al pasar por el canal.}
 \end{figure}
 
 El proyecto consiste en aplicar un algoritmo de filtrado adaptativo
@@ -43,11 +37,15 @@ El proyecto consiste en aplicar un algoritmo de filtrado adaptativo
  lo que simularía enlace digital de comunicaciones, un esquema de lo mencionado
 se puede ver en la siguiente figura.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{imagenes/preblock.png}
     \caption{Esquema del enlace digital.}
 \end{figure}
+
+Como criterio de validación del algoritmo como así de sus parámetros, se calculó el bit error rate (BER), la
+cantidad de bits errados por unidad de tiempo, descartando su cálculo para el 
+período  de entrenamiento, ya que este sólo es de utilidad para ajustar los coeficientes del filtro.
 
 
 

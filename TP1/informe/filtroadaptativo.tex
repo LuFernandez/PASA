@@ -28,12 +28,12 @@ Se trata de una relación de compromiso entre la velocidad de convergencia y el 
 Se realizaron 5000 simulaciones y se calculó el $\mu_\text{máx}$ para cada una de ellas.
 Se muestra a continuación un histograma con la frecuencia de aparición del paso máximo, 
 en función de este y los $\mu_\text{máx}$ en función del número de simulación.
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{imagenes/lms_mus_hist.png}
     \caption{Frecuencias de $\mu_\text{máx}$ en función del mismo.}
 \end{figure}
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{imagenes/lms_mus_scatter.png}
     \caption{$\mu_\text{máx}$ en función del número de simulación.}
@@ -48,6 +48,44 @@ Debido a lo expuesto anteriormente, se decidió no utilizar LMS, en pos de que n
 Esto se logró utilizando NLMS, pues lo que se introduce es un parámetro de paso variable, que depende
 de la energía de la señal de entrada, por lo que la misma ya no es un problema.
 
-\subsection{NLMS}
+\subsection*{NLMS}
+\subsubsection*{Orden del filtro}
+Como se mencionó en secciones anteriores, el canal es, si bien aleatorio, conocido, por 
+lo que se pudo observar analizándolo que contaba con dos pares de polos conjugados, 4 polos.
+Resulta entonces trivial la observación que con un filtro FIR de orden 4, los efectos 
+de las singularidades se verían neutralizados. Se implementó entonces NLMS, y se realizó
+una simulación de Montecarlo del bit error rate (BER) para órdenes de filtro entre 4, 5 y 6, en función del parámetro 
+$\mu$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{imagenes/N_filter.png}
+    \caption{Bit error rate en función de $\mu$ para orden 4, 5 y 6 del filtro.}
+\end{figure}
+
+Se observa que para valores de $\mu$ pequeños, el algoritmo mantiene un BER bajo 
+para orden 4, desestabilizándose para pasos más grandes; no así ocurre con orden 5, 
+que si bien tiene un mayor BER para valores bajos, tiene resultados más consistentes
+para valores mayores de $\mu$. A su vez, este orden obtiene mejores resultados que un 
+filtro de sexto orden. Con todo, el orden del filtro elegido fue 5.
+
+\subsubsection*{Delay}
+En lo que respecta al delay, bloque del esquema de inversión de sistemas, 
+figura \ref{inversion-de-sistemas}, el retardo funciona como una compensación del delay real
+del filtro y del canal. Además, es sólo utilizado para la secuencia de entrenamiento, para obtener la señal deseada.
+En primer lugar se acotó el valor del delay entre 0-4 por el orden ideal del filtro, 
+luego realizó un Montecarlo para estos valores de delay, donde nuevamente se
+graficó el BER en función del parámetro de paso. Obteniendo una mejor tasa de error 
+para el caso de delay unitario por lo que
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{imagenes/delay.png}
+    \caption{Bit error rate en función de $\mu$ para delays entre 0-4.}
+\end{figure}
+
+
+\subsubsection*{Parámetro de paso $\mu$}
+0.005
+
 
 \end{document}
