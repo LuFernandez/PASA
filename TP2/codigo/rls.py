@@ -21,7 +21,7 @@ def measure_d(x):
 
 N_filter = 4
 training = 20
-transmission = 100
+transmission = 1000
 n_bits = training + transmission
 samples_per_bit = 16
 filt = pa.filters.FilterRLS(N_filter, mu=0.98, eps=0.001, w='zeros')
