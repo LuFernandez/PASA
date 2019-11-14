@@ -21,6 +21,6 @@ for i, N_filter in enumerate(Ns_filter):
 plt.grid(which='both')
 plt.xlabel('Paso $\mu$')
 plt.ylabel('Bit error rate')
-#plt.xlim([0, 1])
+# plt.xlim([0, 1])
 plt.legend()
 plt.show()

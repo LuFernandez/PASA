@@ -2,78 +2,111 @@ import numpy as np
 import matplotlib.pylab as plt
 import padasip as pa
 import channel_simulator
+import manchester_equalizer
+import pandas as pd
 
 
-# these two function supplement your online measurment
-def measure_x():
-	# it produces input vector of size 3
-	x = np.random.random(3)
-	return x
-
-
-def measure_d(x):
-	# meausure system output
-	d = 2 * x[0] + 1 * x[1] - 1.5 * x[2]
-	return d
-
-
-
-
-N_filter = 4
-training = 20
-transmission = 1000
+n_filter = 5
+training = 15
+transmission = training
 n_bits = training + transmission
 samples_per_bit = 16
-filt = pa.filters.FilterRLS(N_filter, mu=0.98, eps=0.001, w='zeros')
-d = channel_simulator.generate_random_sequence(n_bits)
-u_ = channel_simulator.tx_channel(d)
-N = len(u_)
 
-u = np.concatenate((np.zeros(N_filter-1), u_))
-log_d = np.zeros(N)
-log_y = np.zeros(N)
-for k in range(samples_per_bit*training):
-	# measure input
-	x = u[k:k+N_filter]
-	# predict new value
-	y = filt.predict(x)
-	# do the important stuff with prediction output
-	pass
-	# measure output
-	# d = measure_d(x)
-	# update filter
-	filt.adapt(d[k], x)
-	# log values
-	log_y[k] = y
+sims = 100
 
-k = samples_per_bit*training
-detected = [0 for __ in range(k)]
+mus = [0.905, 1]
 
-for _ in range(transmission):
-	y_hat = []
-	for i in range(samples_per_bit):
-		y_hat.append(np.dot(u[k+i:k+N_filter+i], filt.w))
+epsilons = [0.15]
+#epsilons = np.arange(0.1, 1.01, 0.1)
 
-	if sum(y_hat[:samples_per_bit//2]) > sum(y_hat[samples_per_bit//2:]):
-		decision = [+1 for __ in range(samples_per_bit//2)] + [-1 for __ in range(samples_per_bit//2)]
-	else:
-		decision = [-1 for __ in range(samples_per_bit//2)] + [+1 for __ in range(samples_per_bit//2)]
+if not (len(epsilons) == 1 or len(mus) == 1):
+	print('ahre')
+	exit(-1)
 
-	for i in range(samples_per_bit):
-		x = u[k + i:k + N_filter + i]
-		y = filt.predict(x)
-		filt.adapt(decision[i], x)
-		log_y[k+i] = y
+ber = np.zeros(max(len(mus), len(epsilons)))
 
-	k += samples_per_bit
-	detected += decision
 
-# show results
-plt.plot(u_, "orange", label="u - noisy input", alpha=0.5)
-plt.plot(d, "b", label="d - target")
-plt.plot(log_y, "g", label="y - output")
-plt.plot(detected, 'red', label='detected bits')
-plt.vlines(training*samples_per_bit, colors='red', ymin=-2, ymax=2)
-plt.legend()
+printing = False
+for sim in range(sims):
+	printing = sim % 10 == 9
+	print("sim n", sim+1)
+	d = channel_simulator.generate_random_sequence(n_bits)
+	u_ = channel_simulator.tx_channel(d)
+	N = len(u_)
+
+	u = np.concatenate((np.zeros(n_filter - 1), u_))
+
+	#if len(epsilons) == 1:
+	for n, mu in enumerate(mus):
+		filt = pa.filters.FilterRLS(n_filter, mu=mu, eps=epsilons[0], w='zeros')
+		log_d = np.zeros(N)
+		log_y = np.zeros(N)
+
+		for k in range(samples_per_bit*training):
+			# measure input
+			x = u[k:k + n_filter]
+			# predict new value
+			log_y[k] = filt.predict(x)
+			# update filter
+			filt.adapt(d[k], x)
+
+		k = samples_per_bit*training
+		detected = manchester_equalizer.decision_algorithm(log_y[:samples_per_bit*training])
+
+		for _ in range(transmission):
+			y_hat = []
+			for i in range(samples_per_bit):
+				y_hat.append(filt.predict(u[k+i:k + n_filter + i]))
+
+			decision = manchester_equalizer.decision_algorithm(y_hat)
+
+			for i in range(samples_per_bit):
+				x = u[k + i:k + n_filter + i]
+				log_y[k + i] = filt.predict(x)
+				filt.adapt(decision[i], x)
+
+			k += samples_per_bit
+			detected += decision
+
+		bit_error_rate = manchester_equalizer.calculate_ber(d[samples_per_bit*training:], detected[samples_per_bit*training:])
+		if printing and not n % 100:
+			print('mu=', mu, ', ber=', bit_error_rate)
+		ber[n] += bit_error_rate
+
+		if bit_error_rate == 0 and mu < 1:
+			# show results
+			plt.plot(u_, "orange", label="u - noisy input", alpha=0.5)
+			plt.plot(d, "b", label="d - target")
+			plt.plot(log_y, "g", label="y - output")
+			plt.plot(detected, 'red', label='detected bits')
+			plt.vlines(training * samples_per_bit, colors='red', ymin=-2, ymax=2)
+			plt.legend()
+			plt.grid(which='both')
+			plt.show()
+
+
+
+ber /= sims
+
+plt.plot(mus, ber)
 plt.grid(which='both')
 plt.show()
+
+
+if len(epsilons) == 1:
+	df = pd.DataFrame(
+		{
+			'mu': mus,
+			'ber': ber
+		}
+	)
+	df.to_csv(path_or_buf='montecarlo_alpha=1e-2_N='+ str(n_filter) + 'epsilon='+str(epsilons[0])+'.csv', index=False)
+
+else:
+	df = pd.DataFrame(
+		{
+			'epsilons': epsilons,
+			'ber': ber
+		}
+	)
+	df.to_csv(path_or_buf='montecarlo_alpha=1e-2_mu=' + str(mus[0]) + '.csv', index=False)
