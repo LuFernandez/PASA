@@ -16,7 +16,7 @@ samples_per_bit = math.ceil(fs / baud_rate)
 delay = 1
 training = 15
 sims = 100
-N_bits = 20
+N_bits = 1000
 N_filter = 5
 
 
