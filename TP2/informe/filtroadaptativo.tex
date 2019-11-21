@@ -95,4 +95,22 @@ para el cual tanto para un  delay unitario, como para un filtro de quinto orden
 el BER obtenido era menor al $5\%$.
 
 
+
+\subsection*{RLS}
+
+Para \'ordenes 4, 5 y 6, se realizaron simulaciones de 1000
+realizaciones del proceso, de 100 bits cada una posteriores a 15 bits de entrenamiento, para distintos valores del factor de regularizaci\'on $\delta$ y factor de olvido $\lambda$. 
+
+Considerando que la constante de tiempo RLS est\'a dada por:
+
+\begin{equation}
+	\tau = -T_s \cdot ln(\lambda)
+\end{equation}
+
+Poni\'endolo en t\'erminos del n\'umero de muestras que representa $\tau = k \cdot T_s$, obtenemos que:
+
+\begin{equation}
+	\lambda = e^{-\nicefrac{T_s}{\tau}} = e^{-\nicefrac{1}{k}}
+\end{equation}
+
 \end{document}
