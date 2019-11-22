@@ -95,4 +95,20 @@ para el cual tanto para un  delay unitario, como para un filtro de quinto orden
 el BER obtenido era menor al $5\%$.
 
 
+\subsection*{RLS}
+\subsection*{Implementación}
+\subsubsection*{Orden del filtro}
+Como se mencionó en secciones anteriores, el canal es, si bien aleatorio, conocido, por 
+lo que se pudo observar analizándolo que contaba con dos pares de polos conjugados, 4 polos.
+Resulta entonces trivial la observación que con un filtro FIR de orden 4, los efectos 
+de las singularidades se verían neutralizados. Se implementó entonces NLMS, y se realizó
+una simulación de Montecarlo del bit error rate (BER) para órdenes de filtro entre 4, 5 y 6, en función del parámetro 
+$\mu$.
+
+\begin{figure}[H]
+    \centering
+ %   \includegraphics[scale=0.6]{.png}
+    \caption{Bit error rate en función de $\mu$ para orden 4, 5 y 6 del filtro.}
+\end{figure}
+
 \end{document}
