@@ -17,7 +17,7 @@ sims = 100
 r_tau = np.linspace(4, 15*samples_per_bit, 50)
 mus = np.exp(-1/r_tau)
 
-epsilons = [0.15]
+epsilons = [0.1, 1]
 #epsilons = np.arange(0.1, 1.01, 0.1)
 
 # if not (len(epsilons) == 1 or len(mus) == 1):
