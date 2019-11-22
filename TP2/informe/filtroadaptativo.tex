@@ -4,7 +4,7 @@
 
 \section{Filtro Adaptativo}
 Al momento de elegir el algoritmo que se implementó para el filtro, 
-se analizaron varias alternativas, entre ellas LMS, NLMS, VS-LMS y Sign LMS.
+se analizaron varias alternativas, entre ellas LMS, NLMS, VS-LMS, Sign LMS y RLS.
 
 En primer lugar, los algoritmos Sign LMS, entre ellos, sign-error, sign-data
 y sign-sign fueron descartados ya que el baud rate de la señal era de 250bps,
@@ -52,6 +52,8 @@ y si se decide por un $\mu$ mayor, divergirá en los otros casos. \newline
 Debido a lo expuesto anteriormente, se decidió no utilizar LMS, en pos de que no diverja el algoritmo. 
 Esto se logró utilizando NLMS, pues lo que se introduce es un parámetro de paso variable, que depende
 de la energía de la señal de entrada, por lo que la misma ya no es un problema.
+
+Por otro lado, se implement\'o a su el filtro con el algoritmo de RLS.
 
 \subsection*{NLMS}
 \subsection*{Implementación}
@@ -107,10 +109,37 @@ Considerando que la constante de tiempo RLS est\'a dada por:
 	\tau = -T_s \cdot ln(\lambda)
 \end{equation}
 
-Poni\'endolo en t\'erminos del n\'umero de muestras que representa $\tau = k \cdot T_s$, obtenemos que:
+Poni\'endolo en t\'erminos del n\'umero de muestras que representa $k$ tal que $\tau = k \cdot T_s$, obtenemos que:
 
 \begin{equation}
-	\lambda = e^{-\nicefrac{T_s}{\tau}} = e^{-\nicefrac{1}{k}}
+	\lambda = e^{-\nicefrac{\tau}{T_s}} = e^{-\nicefrac{1}{k}}
 \end{equation}
+
+De esta manera, se utilzaron valores con espaciado lineal de  $k$ entre un cuarto de bit (4 muestras) y 15 bits (240 muestras). Los resultados obtenidos se ilustran en las figuras \ref{fig:rls4} a \ref{fig:rls6}.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.45\textwidth]
+	{imagenes/rls_ber_n4.png}
+	\caption{Bit error rate en funci\'on de $\mu$ para distintos valores de $\delta$, con $N=4$.}
+	\label{fig:rls4}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.45\textwidth]
+	{imagenes/rls_ber_n5.png}
+	\caption{Bit error rate en funci\'on de $\mu$ para distintos valores de $\delta$, con $N=5$.}
+\end{figure}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.45\textwidth]
+	{imagenes/rls_ber_n6.png}
+	\caption{Bit error rate en funci\'on de $\mu$ para distintos valores de $\delta$, con $N=6$.}
+	\label{fig:rls6}
+\end{figure}
+
+Se observa que el mejor resultado se obtiene nuevamente para $N=5$, es decir sobreajustando el filtro. En este caso, el menor bit error rate se obtiene para $\mu\sim 0.9738$, es decir que $k$ es aproximadamente 38 muestras, o 2.35 bits.
 
 \end{document}
