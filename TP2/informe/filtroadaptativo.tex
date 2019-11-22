@@ -9,7 +9,7 @@ se analizaron varias alternativas, entre ellas LMS, NLMS, VS-LMS y Sign LMS.
 En primer lugar, los algoritmos Sign LMS, entre ellos, sign-error, sign-data
 y sign-sign fueron descartados ya que el baud rate de la señal era de 250bps,
 cabe recordar que esta variante de LMS es de utilidad para ecualizar canales de
-comunicación digital de alta velocidad. 
+comunicación digital de alta velocidad. \newline
 
 En segundo lugar y  luego de analizar 
 los resultados obtenidos y las conclusiones propuestas por Bismor \cite{bismor},
@@ -77,7 +77,9 @@ filtro de sexto orden. Con todo, el orden del filtro elegido fue 5.
 
 \subsubsection*{Delay}
 En lo que respecta al delay, bloque del esquema de inversión de sistemas, 
-figura \ref{inversion-de-sistemas}, el retardo funciona como una compensación del delay real
+figura 3,
+ %\ref{inversion-de-sistemas}, 
+ el retardo funciona como una compensación del delay real
 del filtro y del canal. Además, es sólo utilizado para la secuencia de entrenamiento, para obtener la señal deseada.
 En primer lugar se acotó el valor del delay entre 0-4 por el orden ideal del filtro, 
 luego realizó un Montecarlo para estos valores de delay, donde nuevamente se
@@ -97,20 +99,48 @@ el BER obtenido era menor al $5\%$.
 
 
 \subsection*{RLS}
+En contraste con LMS se tiene el algoritmo RLS. Le gana en velocidad de convergencia, aunque este beneficio tiene como costo alta complejidad computacional.\newline
+En este algoritmo se introduce un factor de peso exponencial $\beta$, también conocido como factor de olvido, definido por:
+\begin{equation}
+	\beta(n,i) = \lambda^{n-i} \: i=1,2,...,n
+\end{equation}
 
-Para \'ordenes 4, 5 y 6, se realizaron simulaciones de 1000
-realizaciones del proceso, de 100 bits cada una posteriores a 15 bits de entrenamiento, para distintos valores del factor de regularizaci\'on $\delta$ y factor de olvido $\lambda$. 
+donde la constante $\lambda$ vale entre cero y uno. Cuanto más cercano a la unidad valga $\lambda$, más valores
+del pasado pesan. El caso máximo se cumple con $\lambda=1$, donde el algoritmo tendría memoria infinita. Esto resulta de 
+utilidad si el proceso es estacionario.\newline
+En segundo lugar, RLS cuenta con otro parámetro conocido como parámetro de regularización, $\delta$. A niveles prácticos, la regularización
+suaviza la solución obtenida ya que castiga los valores altos de $w(n)$.
+La función de costo para este algoritmo es función de ambos parámetros mencionados, entonces de manera análoga al caso del NLMS, se calculó el 
+BER, variando el parámetro de regularización con el fin de encontrar el factor de olvido óptimo para el problema. 
+En tal caso, se realizaron simulaciones de 1000 realizaciones del proceso de 100 bits cada una posteriores a 15 bits de entrenamiento,
+ para órdenes 4, 5 y 6  del filtro para distintos valores del factor de regularización $\delta$ y factor de olvido $\lambda$. 
 
-Considerando que la constante de tiempo RLS est\'a dada por:
+Considerando que la constante de tiempo RLS está dada por:
 
 \begin{equation}
 	\tau = -T_s \cdot ln(\lambda)
 \end{equation}
 
-Poni\'endolo en t\'erminos del n\'umero de muestras que representa $\tau = k \cdot T_s$, obtenemos que:
+Poniéndolo en términos del número de muestras que representa $\tau = k \cdot T_s$, obtenemos que:
 
 \begin{equation}
 	\lambda = e^{-\nicefrac{T_s}{\tau}} = e^{-\nicefrac{1}{k}}
 \end{equation}
 
+\begin{figure}[hp]
+	\centering
+	\includegraphics[width=0.45\textwidth]{imagenes/rls_ber_n4.png}
+	\caption{BER para orden 4 del filtro.}
+\end{figure}
+\begin{figure}[hp]
+	\centering
+	\includegraphics[width=0.45\textwidth]{imagenes/rls_ber_n5.png}
+	\caption{BER para orden 5 del filtro.}
+\end{figure}
+\begin{figure}[hp]
+	\centering
+	\includegraphics[width=0.45\textwidth]{imagenes/rls_ber_n6.png}
+	\caption{BER para orden 6 del filtro.}
+\end{figure}
 \end{document}
+
